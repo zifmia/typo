@@ -24,8 +24,8 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    puts "Howdy  " + params
-    redirect_to :action => 'index'
+    puts "Merging #{params[:id]} and #{params[:merge_id]}"
+    redirect_to :action => 'edit', :id => params[:id]
   end
 
   def new
