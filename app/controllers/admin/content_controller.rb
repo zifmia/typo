@@ -23,17 +23,25 @@ class Admin::ContentController < Admin::BaseController
     end
   end
 
+  def merge
+    puts "Howdy  " + params
+    redirect_to :action => 'index'
+  end
+
   def new
+    @can_merge = false
     new_or_edit
   end
 
   def edit
+    @id = params[:id]
     @article = Article.find(params[:id])
     unless @article.access_by? current_user
       redirect_to :action => 'index'
       flash[:error] = _("Error, you are not allowed to perform this action")
       return
     end
+    @can_merge = (current_user.name == "admin")
     new_or_edit
   end
 
@@ -234,10 +242,10 @@ class Admin::ContentController < Admin::BaseController
       @article.body = body[0]
       @article.extended = body[1]
     end
-
   end
 
   def setup_resources
     @resources = Resource.by_created_at
   end
+
 end

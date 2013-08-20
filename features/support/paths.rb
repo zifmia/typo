@@ -17,6 +17,17 @@ module NavigationHelpers
       '/'
     when /^the new article page$/
       '/admin/content/new'
+    when /^the edit page for "(.*)"$/
+      article = Article.find_by_title($1)
+      assert article.title == $1
+      puts article.title
+      puts article.user_id
+      puts article.body
+      puts article.author
+      puts article.guid
+      url = '/admin/content/edit/' + article.id.to_s
+      puts url
+      url
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

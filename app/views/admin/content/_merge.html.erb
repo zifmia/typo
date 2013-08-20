@@ -1,0 +1,6 @@
+<h4>Merge Articles</h4>
+<%= form_tag("/admin/content/merge/" + @id.to_s) do %>
+  <%= label_tag(:merge_id, "Article ID ") %>
+  <%= text_field_tag(:merge_id) %>
+  <%= submit_tag("Merge") %>
+<% end %>
