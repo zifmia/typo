@@ -25,6 +25,12 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     puts "Merging #{params[:id]} and #{params[:merge_id]}"
+    @article = Article.find(params[:id])
+    begin
+      @article.merge_with(params[:merge_id])
+    rescue
+      
+    end
     redirect_to :action => 'edit', :id => params[:id]
   end
 
